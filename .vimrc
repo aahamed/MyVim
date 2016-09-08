@@ -13,16 +13,16 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
+"Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
 
@@ -37,6 +37,15 @@ Plugin 'jszakmeister/vim-togglecursor'
 
 " Status bar plugin
 Plugin 'vim-airline/vim-airline'
+
+" Indent Line
+Plugin 'Yggdroot/indentLine'
+
+" Supertab
+Plugin 'ervandew/supertab'
+
+" Remember last position
+Plugin 'dietsche/vim-lastplace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,6 +70,8 @@ set number
 set cursorline
 let g:reahash256=1
 colorscheme molokai
+set splitbelow
+set splitright
 
 "C++ style guide
 set shiftwidth=2    " numbers of spaces to (auto)indent
@@ -83,7 +94,23 @@ set nocompatible    " vim, not vi
 "map ctrl-n to open nerd tree
 map <C-n> :NERDTreeToggle<CR>
 "close vim if only window left is nerd tree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+      \ b:NERDTree.isTabTree()) | q | endif
 
 "Airline
 let g:airline#extensions#tabline#enabled = 1
+
+
+" Highlight Column 80
+highlight ColorColumn ctermbg=7
+let w:colCol = 0
+function! ColorColumnToggle()
+  if w:colCol < 1
+    set colorcolumn=80
+    let w:colCol = 1
+  else
+    set colorcolumn =
+    let w:colCol = 0
+  endif
+endfunction
+map <Leader>ll :call ColorColumnToggle()<CR>
