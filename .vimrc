@@ -29,9 +29,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Colorscheme Molokai
 Plugin 'tomasr/molokai'
 
-" File Explorer
-Plugin 'scrooloose/nerdtree'
-
 " Cursor Plugin
 Plugin 'jszakmeister/vim-togglecursor'
 
@@ -46,6 +43,22 @@ Plugin 'ervandew/supertab'
 
 " Remember last position
 Plugin 'dietsche/vim-lastplace'
+
+" Ctrl-Space
+Plugin 'vim-ctrlspace/vim-ctrlspace'
+
+" vim-go
+Plugin 'fatih/vim-go'
+
+" ctrlp
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" bufferline
+Plugin 'bling/vim-bufferline'
+
+" tmuxline
+Plugin 'https://github.com/edkolev/tmuxline.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -63,7 +76,9 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 
 " General
-" 
+"
+syntax on
+set hidden
 set t_Co=256
 set encoding=utf8
 set number
@@ -72,11 +87,12 @@ let g:reahash256=1
 colorscheme molokai
 set splitbelow
 set splitright
+set wildmenu
 
 "C++ style guide
-set shiftwidth=2    " numbers of spaces to (auto)indent
-set softtabstop=2
-set tabstop=2       " numbers of spaces of tab character
+set shiftwidth=4   " numbers of spaces to (auto)indent
+set softtabstop=4
+set tabstop=4       " numbers of spaces of tab character
 set expandtab       " spaces are better than a tab character
 set smarttab
 set autoindent
@@ -99,7 +115,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
 
 "Airline
 let g:airline#extensions#tabline#enabled = 1
-
+set laststatus=2
 
 " Highlight Column 80
 highlight ColorColumn ctermbg=7
@@ -114,3 +130,7 @@ function! ColorColumnToggle()
   endif
 endfunction
 map <Leader>ll :call ColorColumnToggle()<CR>
+
+" Tab switch between buffers
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
