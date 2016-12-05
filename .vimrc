@@ -53,11 +53,11 @@ Plugin 'fatih/vim-go'
 " ctrlp
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" bufferline
-Plugin 'bling/vim-bufferline'
+"CtrlP Buffer Delete Plugin
+Plugin 'd11wtq/ctrlp_bdelete.vim'
 
-" tmuxline
-Plugin 'https://github.com/edkolev/tmuxline.vim'
+"Tmuxline
+Plugin 'edkolev/tmuxline.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -108,29 +108,34 @@ set nocompatible    " vim, not vi
 
 "NerdTree
 "map ctrl-n to open nerd tree
-map <C-n> :NERDTreeToggle<CR>
+"map <C-n> :NERDTreeToggle<CR>
 "close vim if only window left is nerd tree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
-      \ b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+"      \ b:NERDTree.isTabTree()) | q | endif
+
+" no jump on *
+nnoremap * *``
 
 "Airline
 let g:airline#extensions#tabline#enabled = 1
+" Just show the filename (no path) in the tab
+let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
 
-" Highlight Column 80
-highlight ColorColumn ctermbg=7
-let w:colCol = 0
-function! ColorColumnToggle()
-  if w:colCol < 1
-    set colorcolumn=80
-    let w:colCol = 1
-  else
-    set colorcolumn =
-    let w:colCol = 0
-  endif
-endfunction
-map <Leader>ll :call ColorColumnToggle()<CR>
+" quickfix close
+:nnoremap <leader>cc :cclose<CR>
 
 " Tab switch between buffers
 :nnoremap <Tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>
+
+" Ctrlp delete buffer
+call ctrlp_bdelete#init()
+
+" Tmuxline Separators
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
